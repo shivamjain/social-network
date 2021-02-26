@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const {Schema} = require('mongoose');
+const { Schema } = require('mongoose');
 const option = require('./common/option');
 
 const STATUS_ACTIVE = "active", STATUS_PENDING = "pending", STATUS_DISABLED = "disabled", STATUS_DELETED = "deleted";
@@ -36,6 +36,6 @@ let schema = new Schema({
     }
 }, _.merge({collection: "users"}, option));
 
-schema.plugin(require('mongoose-bcrypt'))
+schema.plugin(require('mongoose-bcrypt'));
 
 module.exports = schema;

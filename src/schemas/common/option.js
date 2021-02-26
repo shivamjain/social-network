@@ -4,5 +4,5 @@ module.exports = {
         updatedAt: "modified"
     },
     versionKey: false,
-    autoCreate: false
+    autoCreate: true
 }
