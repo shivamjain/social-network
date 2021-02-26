@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const Registry = require('./src/misc/registry');
 const express = require('express');
 let app = express();
 
@@ -16,6 +17,10 @@ let models = {};
 _.each(schemas, (value, key) => {
 	models[key] = mongodbClient.model(key, value);
 });
+
+Registry.set("env", process.env.NODE_ENV);
+Registry.set("config", config);
+Registry.set("models", models);
 
 const routes = require('./src/routes');
 _.each(routes, (value, key) => {
