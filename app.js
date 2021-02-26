@@ -1,6 +1,15 @@
+const _ = require('lodash');
 const express = require('express');
 let app = express();
 
-app.listen(5000, (req, res) => {
-    console.log("App is running");
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
+const config = require(`./${process.env.NODE_ENV}.config.json`);
+
+const routes = require('./src/routes');
+_.each(routes, (value, key) => {
+    app.use(value);
+})
+
+app.listen(config.app.port, (req, res) => {
+    console.log(`App is running on port: ${config.app.port}`);
 })

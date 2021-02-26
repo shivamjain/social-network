@@ -4,7 +4,13 @@
   "description": "Social Network App",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:node:development": "set NODE_ENV=development&& node app.js",
+    "start:node:staging": "set NODE_ENV=staging&& node app.js",
+    "start:node:production": "set NODE_ENV=production&& node app.js",
+    "start:nodemon:development": "set NODE_ENV=development&& nodemon app.js",
+    "start:nodemon:staging": "set NODE_ENV=staging&& nodemon app.js",
+    "start:nodemon:production": "set NODE_ENV=production&& nodemon app.js"
   },
   "repository": {
     "type": "git",
