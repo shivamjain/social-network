@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const Registry = require('./src/misc/registry');
 const express = require('express');
+const exphbs = require('express-handlebars');
 let app = express();
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
@@ -21,6 +22,15 @@ _.each(schemas, (value, key) => {
 Registry.set("env", process.env.NODE_ENV);
 Registry.set("config", config);
 Registry.set("models", models);
+
+//Express-Handlebars : Rendering View (Node Frontend)
+app.engine('hbs', exphbs({
+    defaultLayout: 'standard',
+    extname: 'hbs',
+    layoutsDir: 'src/views/layouts'
+}));
+
+app.set('view engine', 'hbs');
 
 const routes = require('./src/routes');
 _.each(routes, (value, key) => {

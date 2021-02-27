@@ -7,6 +7,10 @@ router.get('/auth/test', (req, res) => {
         msg: "ok tested",
         environment: Registry.get("env")
     });
+    // res.render('login',{
+    //     msg: "ok tested",
+    //     environment: Registry.get("env")
+    // });
 });
 
 router.post('/auth/login', (req, res) => {
