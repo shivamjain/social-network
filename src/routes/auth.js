@@ -17,7 +17,7 @@ router.get("/auth/test", (req, res) => {
 
 router.get("/auth/login", async (req, res) => {
 	let ctr = new Controller.Auth(req, res);
-	await ctr.login();
+	await ctr.executeMethod("login");
 });
 
 router.post("/auth/register", (req, res) => {});
