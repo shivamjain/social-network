@@ -30,6 +30,7 @@ app.engine('hbs', exphbs({
     layoutsDir: 'src/views/layouts'
 }));
 
+app.set('views',(__dirname + '/src/views')); //In case of custom 'views' path
 app.set('view engine', 'hbs');
 
 const routes = require('./src/routes');
