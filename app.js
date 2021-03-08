@@ -16,7 +16,7 @@ let mongodbClient = mongodbObj.createConnection({ useUnifiedTopology: true });
 const schemas = require('./src/schemas');
 let models = {};
 _.each(schemas, (value, key) => {
-	models[key] = mongodbClient.model(key, value);
+    models[key] = mongodbClient.model(key, value);
 });
 
 Registry.set("env", process.env.NODE_ENV);
@@ -30,11 +30,11 @@ app.engine('hbs', exphbs({
     layoutsDir: 'src/views/layouts'
 }));
 
-app.set('views',(__dirname + '/src/views')); //In case of custom 'views' path
+app.set('views', (__dirname + '/src/views')); //In case of custom 'views' path
 app.set('view engine', 'hbs');
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 const routes = require('./src/routes');
 _.each(routes, (value, key) => {
