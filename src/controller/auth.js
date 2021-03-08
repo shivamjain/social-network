@@ -24,10 +24,10 @@ class Auth extends Base {
 			} else {
 				//console.log(value);
 				let user = await this.models.User.findOne({ email: value.email });
-				if(user && user.verifyPassword(value.password)){
+				if (user && user.verifyPassword(value.password)) {
 					console.log("User Found");
 					//redirect
-				}else{
+				} else {
 					errorMsg = "Invalid Email/Password";
 				}
 			}
@@ -35,7 +35,27 @@ class Auth extends Base {
 		this.res.render("auth/login", { layout: "standard", title, error: errorMsg });
 	}
 
-	async register() { }
+	async register() {
+		let title = "Social Nettwork | Register", errorMsg = "";
+		if (this.req.method == "POST") {
+			//Handle form submission
+			let { error, value } = Validation.Auth.LoginSchema.validate(this.req.body);
+			if (error) {
+				//console.log(error);
+				errorMsg = error;
+			} else {
+				//console.log(value);
+				let user = await this.models.User.findOne({ email: value.email });
+				if (user && user.verifyPassword(value.password)) {
+					console.log("User Found");
+					//redirect
+				} else {
+					errorMsg = "Invalid Email/Password";
+				}
+			}
+		}
+		this.res.render("auth/login", { layout: "standard", title, error: errorMsg });
+	}
 }
 
 module.exports = Auth;

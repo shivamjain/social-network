@@ -23,7 +23,13 @@ router.route("/auth/login").get(async (req, res) => {
 	await ctr.executeMethod("login");
 });
 
-router.post("/auth/register", (req, res) => {});
+router.route("/auth/register").get(async (req, res) => {
+	let ctr = new Controller.Auth(req, res);
+	await ctr.executeMethod("register");
+}).post(async (req, res) => {
+	let ctr = new Controller.Auth(req, res);
+	await ctr.executeMethod("register");
+});
 
 router.get("/auth/logout", (req, res) => {});
 
