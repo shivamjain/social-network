@@ -26,6 +26,7 @@
     "bluebird": "^3.7.2",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.1",
+    "joi": "^17.4.0",
     "lodash": "^4.17.21",
     "mongoose": "^5.11.18",
     "mongoose-bcrypt": "^1.9.0",
