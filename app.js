@@ -33,6 +33,9 @@ app.engine('hbs', exphbs({
 app.set('views',(__dirname + '/src/views')); //In case of custom 'views' path
 app.set('view engine', 'hbs');
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 const routes = require('./src/routes');
 _.each(routes, (value, key) => {
     app.use(value);

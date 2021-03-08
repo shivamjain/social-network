@@ -5,27 +5,18 @@ class Auth extends Base {
 		super(req, res);
 
 		this.beforeMethods = {
-			login: ["TestLoginBefore","TestLoginB4_2"]
+			//login: ["TestLoginBefore", "TestLoginB4_2"]
 		};
 		this.afterMethods = {
-			login: ["TestLoginAfter"]
+			//login: ["TestLoginAfter"]
 		};
-	}
-
-	async TestLoginBefore() {
-		console.log("TestLoginBefore function executed before login");
-	}
-
-    async TestLoginB4_2() {
-		console.log("TestLoginB4_2 function executed before login");
-	}
-
-	async TestLoginAfter() {
-		console.log("TestLoginAfter function executed after login");
 	}
 
 	async login() {
-		this.res.json({ msg: "Login Route access" });
+		if(this.req.method == "POST"){
+			console.log(this.req.body);
+		}
+		this.res.render('auth/login',{ msg: "Login Route access", type: this.req.method });
 	}
 
 	async register() {}

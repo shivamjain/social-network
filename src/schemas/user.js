@@ -9,7 +9,7 @@ let schema = new Schema({
     _id: Schema.ObjectId,
     name: {
         type: String,
-        require: true,
+        required: true,
         minlength: 3,
         maxlength: 50
     },

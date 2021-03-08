@@ -11,11 +11,14 @@ router.get("/auth/test", (req, res) => {
 	res.render("auth/login", {
 		layout: "standard",
 		msg: "ok tested",
-		environment: Registry.get("env"),
+		title: "Social Network App"
 	});
 });
 
-router.get("/auth/login", async (req, res) => {
+router.route("/auth/login").get(async (req, res) => {
+	let ctr = new Controller.Auth(req, res);
+	await ctr.executeMethod("login");
+}).post(async (req, res) => {
 	let ctr = new Controller.Auth(req, res);
 	await ctr.executeMethod("login");
 });
