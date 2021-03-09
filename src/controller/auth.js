@@ -21,7 +21,7 @@ class Auth extends Base {
 	async login() {
 		let title = "Social Network | Login", errorMsg = "";
 		if (this.req.method == "POST") {
-			//Handle form submission
+			// Handle form submission
 			let { error, value } = Validation.Auth.LoginSchema.validate(this.req.body);
 			if (error) {
 				//console.log(error);
@@ -29,8 +29,8 @@ class Auth extends Base {
 			} else {
 				// Cookie set and redirect to dashboard page
 				let user = await this.models.User.findOne({ email: value.email });
-				if (user && user.verifyPassword(value.password)) {
-					//redirect
+				if (user && await user.verifyPassword(value.password)) {
+					// redirect
 					console.log("User Found");
 				} else {
 					errorMsg = "Incorrect Email/Password";
@@ -51,7 +51,7 @@ class Auth extends Base {
 			} else {
 				let user = await this.models.User.findOne({ email: value.email });
 				if (!user) {
-					//register
+					// register
 					let org = new this.models.Organization({
 						_id: Util.generateMongoId(),
 						name: value.companyName,
