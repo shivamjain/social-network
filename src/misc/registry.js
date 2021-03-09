@@ -1,18 +1,18 @@
 //Registry -> Singleton Object (Acts like a global variable for this app)
 class Registry {
-    constructor(){
+    constructor() {
         this.data = {};
     }
 
-    set(key, value = null){
+    set(key, value = null) {
         this.data[key] = value;
     }
 
-    get(key, defaultValue = null){
+    get(key, defaultValue = null) {
         return this.data[key] || defaultValue;
     }
 
-    delete(key){
+    delete(key) {
         delete this.data[key];
     }
 }

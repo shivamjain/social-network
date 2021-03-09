@@ -1,18 +1,11 @@
 const express = require("express");
-const Registry = require("../misc/registry");
-const Controller = require("../controller");
 let router = express.Router();
 
+const Registry = require("../misc/registry");
+const Controller = require("../controller");
+
 router.get("/auth/test", (req, res) => {
-	// res.json({
-	//     msg: "ok tested",
-	//     environment: Registry.get("env")
-	// });
-	res.render("auth/login", {
-		layout: "standard",
-		msg: "ok tested",
-		title: "Social Network App"
-	});
+	res.json({ status: "ok tested", Environment: Registry.get("env") });
 });
 
 router.route("/auth/login").get(async (req, res) => {

@@ -1,9 +1,9 @@
 {
-    "app":{
+    "app": {
         "port": ""
     },
-    "database":{
-        "mongodb":{
+    "database": {
+        "mongodb": {
             "user": "",
             "password": "",
             "host": "",

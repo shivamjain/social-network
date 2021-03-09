@@ -2,6 +2,7 @@
 const _ = require("lodash");
 const Promise = require("bluebird");
 
+// Internal Deps
 const Registry = require("../misc/registry");
 
 class Base {
