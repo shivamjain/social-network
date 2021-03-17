@@ -1,7 +1,8 @@
 const _ = require("lodash");
-const Registry = require("./src/misc/registry");
 const express = require("express");
+const cookieParser = require('cookie-parser');
 const exphbs = require("express-handlebars");
+const Registry = require("./src/misc/registry");
 let app = express();
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
@@ -36,6 +37,7 @@ app.set("view engine", "hbs");
 // Body Parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Routes
 const routes = require("./src/routes");
