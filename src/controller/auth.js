@@ -26,13 +26,13 @@ class Auth extends Base {
 	__getPayload() {
 		let payload = null;
 		try {
-			let token = this.req.cookies.hasOwnProperty(COOKIE_NAME) ? this.req.cookies[COOKIE_NAME] : null;
+			let token = this.req.cookies[COOKIE_NAME] ? this.req.cookies[COOKIE_NAME] : null;
 			if (!token) {
 				throw new Error("Token not found");
 			}
 			payload = jwt.verify(token, this.config.app.secret);
 		} catch (error) {
-			console.log(error);
+			//console.log(error.message);
 		}
 		return payload;
 	}
@@ -48,9 +48,9 @@ class Auth extends Base {
 		let payload = this.__getPayload();
 		if (!payload) {
 			console.log("Payload null");
-			this.res.redirect("/auth/login");
+			return this.res.redirect("/auth/login");
 		}
-		console.log(payload);
+		//console.log(payload);
 		let user = await this.models.User.findOne({ _id: payload.uid });
 		let org = await this.models.Organization.findOne({ _id: payload.oid });
 		if (!user || !org) {
