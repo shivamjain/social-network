@@ -4,7 +4,7 @@ let router = express.Router();
 const Registry = require("../misc/registry");
 const Controller = require("../controller");
 
-router.get("/auth/test", (req, res) => {
+router.get("/test", (req, res) => {
 	res.json({ status: "ok tested", Environment: Registry.get("env") });
 });
 
@@ -24,6 +24,9 @@ router.route("/auth/register").get(async (req, res) => {
 	await ctr.executeMethod("register");
 });
 
-router.get("/auth/logout", (req, res) => {});
+router.route("/auth/logout").get(async (req, res) => {
+	let ctr = new Controller.Auth(req, res);
+	await ctr.executeMethod("logout");
+});
 
 module.exports = router;

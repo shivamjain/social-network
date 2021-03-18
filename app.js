@@ -23,14 +23,15 @@ _.each(schemas, (value, key) => {
 Registry.set("env", process.env.NODE_ENV);
 Registry.set("config", config);
 Registry.set("models", models);
+Registry.set("__dirname", __dirname);
 
 // Express-Handlebars : Rendering View (Node Frontend)
 app.engine("hbs", exphbs({
     defaultLayout: "standard",
     extname: "hbs",
-    layoutsDir: "src/views/layouts"
+    layoutsDir: "src/views/layouts",
+    partialsDir: Registry.get("__dirname") + "/src/views"
 }));
-
 app.set("views", (__dirname + "/src/views")); //In case of custom 'views' path
 app.set("view engine", "hbs");
 
