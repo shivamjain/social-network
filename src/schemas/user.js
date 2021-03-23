@@ -47,11 +47,13 @@ let schema = new Schema({
 		default: null
 	},
 	dob: {
-		type: Date
+		type: Date,
+		required: true
 	},
 	gender: {
 		type: String,
-		enum: GENDER_ENUM
+		enum: GENDER_ENUM,
+		required: true
 	}
 }, _.merge({ collection: "users" }, option));
 schema.plugin(require("mongoose-bcrypt"));
