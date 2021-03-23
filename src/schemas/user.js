@@ -8,12 +8,11 @@ const STATUS_ENUM = [STATUS_ACTIVE, STATUS_PENDING, STATUS_DISABLED, STATUS_DELE
 const TYPE_ADMIN = "admin", TYPE_MEMBER = "member";
 const TYPE_ENUM = [ TYPE_ADMIN, TYPE_MEMBER];
 
+const GENDER_MALE = "male", GENDER_FEMALE = "female", GENDER_OTHERS = "others";
+const GENDER_ENUM = [ GENDER_MALE, GENDER_FEMALE, GENDER_OTHERS];
+
 let schema = new Schema({
 	_id: {
-		type: Schema.ObjectId,
-		required: true
-	},
-	orgId: {
 		type: Schema.ObjectId,
 		required: true
 	},
@@ -46,6 +45,13 @@ let schema = new Schema({
 	phone: {
 		type: String,
 		default: null
+	},
+	dob: {
+		type: Date
+	},
+	gender: {
+		type: String,
+		enum: GENDER_ENUM
 	}
 }, _.merge({ collection: "users" }, option));
 schema.plugin(require("mongoose-bcrypt"));

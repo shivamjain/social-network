@@ -14,7 +14,6 @@ class Auth extends Base {
 		super(req, res);
 
 		this.user = null;
-		this.org = null;
 
 		this.beforeMethods = {
 			login: ["_isLoggedIn"],
@@ -52,16 +51,14 @@ class Auth extends Base {
 		}
 		//console.log(payload);
 		let user = await this.models.User.findOne({ _id: payload.uid });
-		let org = await this.models.Organization.findOne({ _id: payload.oid });
-		if (!user || !org) {
+		if (!user) {
 			this.res.redirect("/auth/login");
 		}
 		this.user = user;
-		this.org = org;
 	}
 
-	__generateToken(org, user, seconds = 3600) {
-		let payload = { uid: user._id, oid: org._id };
+	__generateToken(user, seconds = 3600) {
+		let payload = { uid: user._id };
 		let options = { expiresIn: seconds };
 		return jwt.sign(payload, this.config.app.secret, options);
 	}
@@ -81,16 +78,12 @@ class Auth extends Base {
 					if (!user || !await user.verifyPassword(value.password)) {
 						throw new Error("Incorrect Email/Password");
 					}
-					let org = await this.models.Organization.findOne({ _id: user.orgId });
-					if (!org) {
-						throw new Error("Incorrect Email/Password");
-					}
-					if (user.status != this.models.User.STATUS_ACTIVE || org.status != this.models.Organization.STATUS_ACTIVE) {
+					if (user.status != this.models.User.STATUS_ACTIVE) {
 						throw new Error("Account not active");
 					}
 					console.log("User found");
 					let seconds = 3600;
-					let token = this.__generateToken(org, user, seconds);
+					let token = this.__generateToken(user, seconds);
 					this.res.cookie("_token", token, {
 						maxAge: seconds * 1000,
 						secure: false,
@@ -112,31 +105,26 @@ class Auth extends Base {
 			// Handle form submission
 			let { error, value } = Validation.Auth.RegisterSchema.validate(this.req.body);
 			if (error) {
-				//console.log(error);
+				console.log(error);
 				errorMsg = _.size(error.details) > 0 ? error.details[0].message : null;
 			} else {
 				let user = await this.models.User.findOne({ email: value.email });
 				if (!user) {
 					// register
-					let org = new this.models.Organization({
-						_id: Util.generateMongoId(),
-						name: value.companyName,
-						status: this.models.Organization.STATUS_ACTIVE
-					});
 					user = new this.models.User({
 						_id: Util.generateMongoId(),
-						orgId: org._id,
 						name: value.name,
 						status: this.models.User.STATUS_ACTIVE,
 						phone: value.phone,
 						email: value.email,
 						password: value.password,
-						type: this.models.User.TYPE_ADMIN
+						type: this.models.User.TYPE_ADMIN,
+						dob: value.dob,
+						gender: value.gender
 					});
 					const session = await this.models.User.startSession();
 					session.startTransaction();
 					try {
-						await org.save({ session });
 						await user.save({ session });
 						await session.commitTransaction();
 						successMsg = "User registered successfully.";

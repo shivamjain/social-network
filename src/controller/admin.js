@@ -18,8 +18,7 @@ class Admin extends Auth {
             title,
             error: errorMsg,
             success: successMsg,
-            user: this.user ? this.user.toJSON() : null,
-            org: this.org ? this.org.toJSON() : null
+            user: this.user ? this.user.toJSON() : null
         });
     }
 }

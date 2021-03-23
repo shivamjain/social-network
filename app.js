@@ -35,7 +35,7 @@ app.engine("hbs", exphbs({
 app.set("views", (__dirname + "/src/views")); //In case of custom 'views' path
 app.set("view engine", "hbs");
 
-// Body Parser
+// Body and Cookie Parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

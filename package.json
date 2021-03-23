@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/shivamjain/social-network#readme",
   "dependencies": {
+    "@joi/date": "^2.0.1",
     "bluebird": "^3.7.2",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
