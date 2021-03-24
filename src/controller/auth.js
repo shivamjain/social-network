@@ -54,6 +54,7 @@ class Auth extends Base {
 		if (!user) {
 			this.res.redirect("/auth/login");
 		}
+		// Set user details in this.user fetched from payload
 		this.user = user;
 	}
 
@@ -110,7 +111,7 @@ class Auth extends Base {
 			} else {
 				let user = await this.models.User.findOne({ email: value.email });
 				if (!user) {
-					// register
+					// register user
 					user = new this.models.User({
 						_id: Util.generateMongoId(),
 						name: value.name,
@@ -122,6 +123,7 @@ class Auth extends Base {
 						dob: value.dob,
 						gender: value.gender
 					});
+					// save using session
 					const session = await this.models.User.startSession();
 					session.startTransaction();
 					try {
