@@ -16,15 +16,21 @@ class Admin extends Auth {
     async dashboard() {
         let title = "Welcome to Dashboard", errorMsg = "", successMsg = "";
 
+        //Retrieve posts
+        let postData = await this.posts_fetch();
+        //console.log(postData);
+
         this.res.render("admin/dashboard", {
             layout: "admin",
             title,
             error: errorMsg,
             success: successMsg,
-            user: this.user ? this.user.toJSON() : null
+            user: this.user ? this.user.toJSON() : null,
+            post: postData ? postData : null
         });
     }
 
+    // Create post
     async post() {
         let title = "Create Post", errorMsg = "", successMsg = "";
         if (this.req.method == "POST") {
@@ -44,6 +50,7 @@ class Admin extends Auth {
                         userId: this.user._id
                     });
                     await post.save();
+                    successMsg = "Post created successfully!";
                     //console.log(post);
                 } catch (error) {
                     console.log(error);
@@ -58,7 +65,23 @@ class Admin extends Auth {
             user: this.user ? this.user.toJSON() : null
         });
     }
-    
+
+    async posts_fetch() {
+        try {
+            //*use lean() OR add runtime option to handlebars engine to resolve access "own property" issue*
+            if(!this.user){
+                throw new Error("User not found");
+            }
+            let post = await this.models.Post.find({ userId: this.user._id }).lean();
+            // _.each(post, (p) => {
+            //     p = p.toJSON();
+            // });
+            return post;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 }
 
 module.exports = Admin;

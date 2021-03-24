@@ -70,7 +70,7 @@ class Auth extends Base {
 			// Handle form submission
 			let { error, value } = Validation.Auth.LoginSchema.validate(this.req.body);
 			if (error) {
-				//console.log(error);
+				console.log(error);
 				errorMsg = _.size(error.details) > 0 ? error.details[0].message : null;
 			} else {
 				// Cookie set and redirect to dashboard page

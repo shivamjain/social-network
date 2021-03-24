@@ -30,7 +30,11 @@ app.engine("hbs", exphbs({
     defaultLayout: "standard",
     extname: "hbs",
     layoutsDir: "src/views/layouts",
-    partialsDir: Registry.get("__dirname") + "/src/views"
+    partialsDir: Registry.get("__dirname") + "/src/views",
+    /* runtimeOptions: {
+         allowProtoPropertiesByDefault: true,
+         allowProtoMethodsByDefault: true,
+    */
 }));
 app.set("views", (__dirname + "/src/views")); //In case of custom 'views' path
 app.set("view engine", "hbs");
