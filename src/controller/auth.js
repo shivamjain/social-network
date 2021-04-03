@@ -123,7 +123,7 @@ class Auth extends Base {
 						dob: value.dob,
 						gender: value.gender
 					});
-					// save using session
+					// save using session (generally with 1+ models)
 					const session = await this.models.User.startSession();
 					session.startTransaction();
 					try {

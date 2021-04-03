@@ -1,4 +1,5 @@
 const _ = require("lodash");
+const path = require("path"); //path module
 const express = require("express");
 const cookieParser = require('cookie-parser');
 const exphbs = require("express-handlebars");
@@ -38,6 +39,9 @@ app.engine("hbs", exphbs({
 }));
 app.set("views", (__dirname + "/src/views")); //In case of custom 'views' path
 app.set("view engine", "hbs");
+
+// Set static folder (views)
+app.use(express.static(path.join(__dirname, "src/views")));
 
 // Body and Cookie Parser
 app.use(express.json());

@@ -1,28 +1,43 @@
-<div class="card mt-2" style="width: 60%; margin: 0 auto;">
-  {{#if error}}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      {{error}}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+<div class="container-fluid p-0">
+  <div class="row no-gutters">
+    <div class="col-lg-6 order-2 order-lg-1">
+      <div class="timeline-bg-content bg-img" data-bg="../assets/images/timeline/adda-timeline.jpg">
+        <h3 class="timeline-bg-title">Let’s see what’s happening to you and your world.
+          Welcome in Adda.</h3>
+      </div>
     </div>
-  {{/if}}
+    <div class="col-lg-6 order-1 order-lg-2 d-flex align-items-center justify-content-center">
+      <div class="signup-form-wrapper">
+        <h1 class="create-acc text-center">Login form</h1>
+        <div class="signup-inner text-center">
+          <h3 class="title">Welcome</h3>
 
-  <form class="p-4" method="post">
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp"
-        required>
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          {{#if error}}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{error}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {{/if}}
+
+          <form class="signup-inner--form" method="post">
+            <div class="row">
+              <div class="col-12">
+                <input type="email" class="single-field" placeholder="Email" name="email" required>
+              </div>
+              <div class="col-12">
+                <input type="password" class="single-field" placeholder="Password" name="password" required>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="submit-btn">LOGIN</button>
+              </div>
+            </div>
+            {{!-- <h6 class="terms-condition">I have read & accepted the <a href="#">terms
+                                of use</a></h6> --}}
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" name="password" class="form-control" id="exampleInputPassword1" required>
-    </div>
-    {{!-- <div class="form-group form-check">
-      <input type="checkbox" name="rememberMe" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Remember me</label>
-    </div> --}}
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  </div>
 </div>

@@ -68,7 +68,7 @@ class Admin extends Auth {
 
     async posts_fetch() {
         try {
-            //*use lean() OR add runtime option to handlebars engine to resolve access "own property" issue*
+            //*use lean() OR add runtime option to handlebars engine to resolve "access own property" issue*
             if(!this.user){
                 throw new Error("User not found");
             }
