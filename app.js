@@ -1,4 +1,5 @@
 const _ = require("lodash");
+const moment = require("moment");
 const path = require("path"); //path module
 const express = require("express");
 const cookieParser = require('cookie-parser');
@@ -27,7 +28,16 @@ Registry.set("models", models);
 Registry.set("__dirname", __dirname);
 
 // Express-Handlebars : Rendering View (Node Frontend)
-app.engine("hbs", exphbs({
+var hbs = exphbs.create({
+    // Specify helpers which are only registered on this instance.
+    helpers: {
+        foo: function () { return 'FOO!'; },
+        bar: function () { return 'BAR!'; },
+        dateFormat: function (dateString) {
+            return moment(dateString).format("D MMM YYYY, h:mm:ss a").toUpperCase();
+        }
+    },
+    //handlebars config
     defaultLayout: "standard",
     extname: "hbs",
     layoutsDir: "src/views/layouts",
@@ -36,7 +46,9 @@ app.engine("hbs", exphbs({
          allowProtoPropertiesByDefault: true,
          allowProtoMethodsByDefault: true,
     */
-}));
+});
+
+app.engine("hbs", hbs.engine);
 app.set("views", (__dirname + "/src/views")); //In case of custom 'views' path
 app.set("view engine", "hbs");
 
