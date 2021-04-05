@@ -47,12 +47,12 @@ class Auth extends Base {
 		let payload = this.__getPayload();
 		if (!payload) {
 			console.log("Payload null");
-			return this.res.redirect("/auth/login");
+			return this.res.redirect("/login");
 		}
 		//console.log(payload);
 		let user = await this.models.User.findOne({ _id: payload.uid });
 		if (!user) {
-			this.res.redirect("/auth/login");
+			this.res.redirect("/login");
 		}
 		// Set user details in this.user fetched from payload
 		this.user = user;
@@ -152,7 +152,7 @@ class Auth extends Base {
 
 	async logout() {
 		this.res.clearCookie(COOKIE_NAME);
-		this.res.redirect("/auth/login");
+		this.res.redirect("/login");
 	}
 }
 
