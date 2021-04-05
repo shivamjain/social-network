@@ -16,10 +16,10 @@ class Admin extends Auth {
     async dashboard() {
         let title = "Welcome to Dashboard", errorMsg = "", successMsg = "";
 
-        //Retrieve posts
+        // Retrieve posts
         let postData = await this.posts_fetch();
         //console.log(postData);
-
+        //console.log(this.user);
         this.res.render("admin/dashboard", {
             layout: "admin",
             title,
