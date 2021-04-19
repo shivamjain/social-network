@@ -1,5 +1,5 @@
 const _ = require("lodash");
-const moment = require("moment");
+const moment = require("moment"); //date formatter module
 const path = require("path"); //path module
 const express = require("express");
 const cookieParser = require('cookie-parser');
@@ -31,8 +31,6 @@ Registry.set("__dirname", __dirname);
 var hbs = exphbs.create({
     // Specify helpers which are only registered on this instance.
     helpers: {
-        foo: function () { return 'FOO!'; },
-        bar: function () { return 'BAR!'; },
         dateFormat: function (dateString) {
             return moment(dateString).format("D MMM YYYY, h:mm:ss a").toUpperCase();
         }
@@ -53,7 +51,7 @@ app.set("views", (__dirname + "/src/views")); //In case of custom 'views' path
 app.set("view engine", "hbs");
 
 // Set static folder (views)
-app.use(express.static(path.join(__dirname, "src/views")));
+app.use(express.static(path.join(__dirname, "src/public")));
 
 // Body and Cookie Parser
 app.use(express.json());
